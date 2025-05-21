@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f5f9; /* Soft blue background color */
+        }
+        
+        .clock-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .clock {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 280px;
+        }
+        
+        .clock-face {
+            width: 200px;
+            height: 200px;
+            border: 8px solid #333;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            position: relative;
+            background: #fff;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hand {
+            position: absolute;
+            transform-origin: bottom center;
+            background-color: #333;
+            bottom: 50%;
+            left: 50%;
+        }
+        
+        .hour-hand {
+            width: 6px;
+            height: 60px;
+            margin-left: -3px;
+        }
+        
+        .minute-hand {
+            width: 4px;
+            height: 80px;
+            margin-left: -2px;
+        }
+        
+        .second-hand {
+            width: 2px;
+            height: 90px;
+            margin-left: -1px;
+            background-color: #f44336;
+        }
+        
+        .center-circle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .clock-numbers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .number {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .number span {
+            display: inline-block;
+            transform: rotate(var(--rotation-reverse));
+        }
+        
+        .timezone {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .digital-time {
+            font-size: 20px;
+            color: #555;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Timezone Clocks</h1>
+    
+    <div class="clock-container">
+        <div class="clock">
+            <div class="timezone">Eastern Time (EST/EDT)</div>
+            <div class="clock-face" id="est-clock">
+                <div class="clock-numbers">
+                    <div class="number" style="--rotation: 0deg; --rotation-reverse: 0deg;"><span>12</span></div>
+                    <div class="number" style="--rotation: 30deg; --rotation-reverse: -30deg;"><span>1</span></div>
+                    <div class="number" style="--rotation: 60deg; --rotation-reverse: -60deg;"><span>2</span></div>
+                    <div class="number" style="--rotation: 90deg; --rotation-reverse: -90deg;"><span>3</span></div>
+                    <div class="number" style="--rotation: 120deg; --rotation-reverse: -120deg;"><span>4</span></div>
+                    <div class="number" style="--rotation: 150deg; --rotation-reverse: -150deg;"><span>5</span></div>
+                    <div class="number" style="--rotation: 180deg; --rotation-reverse: -180deg;"><span>6</span></div>
+                    <div class="number" style="--rotation: 210deg; --rotation-reverse: -210deg;"><span>7</span></div>
+                    <div class="number" style="--rotation: 240deg; --rotation-reverse: -240deg;"><span>8</span></div>
+                    <div class="number" style="--rotation: 270deg; --rotation-reverse: -270deg;"><span>9</span></div>
+                    <div class="number" style="--rotation: 300deg; --rotation-reverse: -300deg;"><span>10</span></div>
+                    <div class="number" style="--rotation: 330deg; --rotation-reverse: -330deg;"><span>11</span></div>
+                </div>
+                <div class="hand hour-hand" id="est-hour"></div>
+                <div class="hand minute-hand" id="est-minute"></div>
+                <div class="hand second-hand" id="est-second"></div>
+                <div class="center-circle"></div>
+            </div>
+            <div class="digital-time" id="est-digital">00:00:00</div>
+        </div>
+        
+        <div class="clock">
+            <div class="timezone">Pacific Time (PST/PDT)</div>
+            <div class="clock-face" id="pst-clock">
+                <div class="clock-numbers">
+                    <div class="number" style="--rotation: 0deg; --rotation-reverse: 0deg;"><span>12</span></div>
+                    <div class="number" style="--rotation: 30deg; --rotation-reverse: -30deg;"><span>1</span></div>
+                    <div class="number" style="--rotation: 60deg; --rotation-reverse: -60deg;"><span>2</span></div>
+                    <div class="number" style="--rotation: 90deg; --rotation-reverse: -90deg;"><span>3</span></div>
+                    <div class="number" style="--rotation: 120deg; --rotation-reverse: -120deg;"><span>4</span></div>
+                    <div class="number" style="--rotation: 150deg; --rotation-reverse: -150deg;"><span>5</span></div>
+                    <div class="number" style="--rotation: 180deg; --rotation-reverse: -180deg;"><span>6</span></div>
+                    <div class="number" style="--rotation: 210deg; --rotation-reverse: -210deg;"><span>7</span></div>
+                    <div class="number" style="--rotation: 240deg; --rotation-reverse: -240deg;"><span>8</span></div>
+                    <div class="number" style="--rotation: 270deg; --rotation-reverse: -270deg;"><span>9</span></div>
+                    <div class="number" style="--rotation: 300deg; --rotation-reverse: -300deg;"><span>10</span></div>
+                    <div class="number" style="--rotation: 330deg; --rotation-reverse: -330deg;"><span>11</span></div>
+                </div>
+                <div class="hand hour-hand" id="pst-hour"></div>
+                <div class="hand minute-hand" id="pst-minute"></div>
+                <div class="hand second-hand" id="pst-second"></div>
+                <div class="center-circle"></div>
+            </div>
+            <div class="digital-time" id="pst-digital">00:00:00</div>
+        </div>
+    </div>
+
+    <script>
+        function updateClocks() {
+            const now = new Date();
+            
+            // Eastern Time (ET)
+            const etOptions = { timeZone: 'America/New_York', hour12: false };
+            const etTime = now.toLocaleTimeString('en-US', etOptions);
+            const [etHours, etMinutes, etSeconds] = etTime.split(':').map(Number);
+            
+            // Pacific Time (PT)
+            const ptOptions = { timeZone: 'America/Los_Angeles', hour12: false };
+            const ptTime = now.toLocaleTimeString('en-US', ptOptions);
+            const [ptHours, ptMinutes, ptSeconds] = ptTime.split(':').map(Number);
+            
+            // Update Eastern Time clock
+            updateClockHands('est', etHours, etMinutes, etSeconds);
+            document.getElementById('est-digital').textContent = formatDigitalTime(etHours, etMinutes, etSeconds);
+            
+            // Update Pacific Time clock
+            updateClockHands('pst', ptHours, ptMinutes, ptSeconds);
+            document.getElementById('pst-digital').textContent = formatDigitalTime(ptHours, ptMinutes, ptSeconds);
+        }
+        
+        function updateClockHands(prefix, hours, minutes, seconds) {
+            // Calculate rotation angles
+            const hourDegrees = (hours % 12) * 30 + minutes * 0.5; // 30 degrees per hour + small adjustment for minutes
+            const minuteDegrees = minutes * 6; // 6 degrees per minute
+            const secondDegrees = seconds * 6; // 6 degrees per second
+            
+            // Apply rotations
+            document.getElementById(`${prefix}-hour`).style.transform = `translateX(-50%) rotate(${hourDegrees}deg)`;
+            document.getElementById(`${prefix}-minute`).style.transform = `translateX(-50%) rotate(${minuteDegrees}deg)`;
+            document.getElementById(`${prefix}-second`).style.transform = `translateX(-50%) rotate(${secondDegrees}deg)`;
+        }
+        
+        function formatDigitalTime(hours, minutes, seconds) {
+            // Add leading zeros if needed
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        // Position clock numbers correctly
+        document.querySelectorAll('.number').forEach(num => {
+            const rotation = num.style.getPropertyValue('--rotation');
+            num.style.transform = `rotate(${rotation})`;
+        });
+        
+        // Update clocks immediately and then every second
+        updateClocks();
+        setInterval(updateClocks, 1000);
+    </script>
+</body>
+</html>
